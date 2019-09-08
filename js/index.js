@@ -89,25 +89,29 @@ navElements.forEach((nav) => {
 
 
 
-// const funBusImage = document.querySelector('.container.home .intro img');
+const funBusImage = document.querySelector('.container.home .intro img');
 
-// funBusImage.draggable = 'true';
+funBusImage.draggable = 'true';
 
-// funBusImage.addEventListener('dragstart', (event) => {
-//     // event.preventDefault();
-//     event.dataTransfer.setData("text", event.target.id);
-// });
+let dragged;
+
+document.addEventListener('dragstart', (event) => {
+    // event.preventDefault();
+    dragged = event.target
+    event.dataTransfer.setData("text", event.target.id);
+});
 
 
 
-// funBusImage.addEventListener('dragend', (event) => {
-//     event.preventDefault();
+document.addEventListener('drop', (event) => {
+    event.preventDefault();
 
-//     event.target.appendChild(funBusImage);
 
-//     funBusImage.parentNode.removeChild(funBusImage);
-// })
+    dragged.parentNode.removeChild(dragged);
+    event.target.appendChild(dragged);
 
-// document.addEventListener("dragover", function(event) {
-//     event.preventDefault();
-//   }, false);
+})
+
+document.addEventListener("dragover", function(event) {
+    event.preventDefault();
+  }, false);
